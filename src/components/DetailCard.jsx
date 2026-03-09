@@ -50,7 +50,7 @@ const PosterImage = styled.img`
 `;
 
 export const DetailCard = ({ movieId }) => {
-    const movie = movieData.results.find((item) => item.id == movieId)
+    const movie = movieData.results.find((movie) => movie.id == movieId)
     const genreNames = movie.genre_ids.map((id) => genreData[id]).join('/ ');
 
     return (
