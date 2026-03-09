@@ -38,8 +38,8 @@ export const DetailCard = () => {
       <PosterImage src={imageUrl + movie.poster_path} alt={movie.title} />
       <Info>
         <h1 style={{ margin: 0, fontSize: `40px` }}>{movie.title}</h1>
-        <h3 style={{ fontSize: `24px` }}>평점: {movie.vote_average}</h3>
-        <h3 style={{ fontSize: `24px` }}>장르: {genreNames}</h3>
+        <h3 style={{ fontSize: `23px` }}>평점: {movie.vote_average}</h3>
+        <h3 style={{ fontSize: `23px` }}>장르: {genreNames}</h3>
         <p style={{ fontSize: `18px`, lineHeight: "1.5" }}>{movie.overview}</p>
       </Info>
     </DetailCardContainer>
