@@ -11,59 +11,75 @@ const LayOutContainer = styled.section`
   background-color: #202020;
   position: relative;
 `;
-
+const Logo = styled.div`
+  padding: 18px;
+  font-size: 30px;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+`;
+const SearchInput = styled.input`
+  padding: 5px;
+  border-radius: 33px;
+  width: 500px;
+  height: 30px;
+  margin: 15px;
+`;
+const LoginButton = styled.button`
+  height: 30px;
+  width: 60px;
+  background-color: #6600cc;
+  margin: 0 20px 0 0;
+  border-radius: 4px;
+  color: white;
+  border: none;
+`;
+const SignUpButton = styled.button`
+  height: 30px;
+  width: 80px;
+  background-color: #6600cc;
+  border-radius: 4px;
+  color: white;
+  border: none;
+`;
+const ButtenContainer = styled.div`
+  padding: 20px;
+`;
+const MainContent = styled.main`
+  background-color: #141414;
+  min-height: calc(100vh - 80px);
+  padding: 40px;
+  color: white;
+  display: flex;
+  justify-content: center;
+`;
 export default function LayOut() {
   return (
     <>
       <LayOutContainer>
-        <div style={{ padding: "18px", fontSize: "30px", fontWeight: "600" }}>
+        <Logo>
           <Link to={"/"} style={{ color: "white", textDecoration: "none" }}>
             OZ무비
           </Link>
-        </div>
-        <div>
-          <input
-            style={{
-              padding: "5px",
-              borderRadius: "33px",
-              width: "500px",
-              height: "30px",
-              margin: "15px",
-            }}
-          />
-        </div>
-        <div style={{ padding: "20px" }}>
-          <button
-            style={{
-              height: "30px",
-              width: "60px",
-              backgroundColor: "#6600CC",
-              margin: "0 20px 0 0",
-              borderRadius: "4px",
-              color: "white",
-              border: "none",
-            }}
+        </Logo>
+        <SearchInput
+          type="text"
+        />
+        <ButtenContainer>
+          <LoginButton
           >
             로그인
-          </button>
-          <button
-            style={{
-              height: "30px",
-              width: "80px",
-              backgroundColor: "#6600CC",
-              borderRadius: "4px",
-              color: "white",
-              border: "none",
-            }}
+          </LoginButton>
+          <SignUpButton
           >
             회원가입
-          </button>
-        </div>
+          </SignUpButton>
+        </ButtenContainer>
       </LayOutContainer>
 
-      <main>
+      <MainContent>
         <Outlet />
-      </main>
+      </MainContent>
     </>
   );
 }

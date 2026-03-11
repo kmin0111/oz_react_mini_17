@@ -1,13 +1,42 @@
-import { useState } from "react";
-import "./App.css";
-import movieData from "../movieListData.json";
-import { Card } from "./components/MovieCard";
-import { Route, Routes } from "react-router-dom";
-import { DetailCard } from "./components/DetailCard";
+import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import Card from "./components/MovieCard";
+import Detail from "./components/DetailCard";
 import LayOut from "./components/LayOut";
+import styled from "styled-components";
 
+const MainStyle = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  background-color: black;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+`; 
 function App() {
-  const [movies, setMovies] = useState(movieData.results);
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const url = "https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1";
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+        },
+      };
+      try {
+        const response = await fetch(url, options);
+        const data = await response.json();
+        const safeMovies = data.results.filter((movie) => movie.adult === false);
+        setMovies(safeMovies);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchMovies();
+  }, []);
 
   return (
     <Routes>
@@ -15,27 +44,20 @@ function App() {
         <Route
           index
           element={
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                backgroundColor: `black`,
-                gap: `20px`,
-                padding: `20px`,
-              }}
-            >
+            <MainStyle>
               {movies.map((movie) => (
                 <Card
                   key={movie.id}
+                  id={movie.id}
                   title={movie.title}
                   posterPath={movie.poster_path}
                   voteAverage={movie.vote_average}
                 />
               ))}
-            </div>
+            </MainStyle>
           }
         />
-        <Route path="/details" element={<DetailCard />} />
+        <Route path="/details/:id" element={<Detail />} />
       </Route>
     </Routes>
   );
